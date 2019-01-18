@@ -55,21 +55,26 @@ plot(old_channel, energy,'o-');
 %
 %Analysis Step 3
 %
+%this good make it look like this
 energy1 = energy(140:1:190);
 peak1= mossbauer_data_no_background(140:190,1);
 
-energy2=[247:1:275];
-peak2=mossbauer_data_no_background(247:275,1);
+%energy2=[247:1:275];
+%peak2=mossbauer_data_no_background(247:275,1);
+
 
 lorentzian = @(b,x) ( b(1)./( (x-b(2)).^2 + b(3) ) )
-
+%do this for all of the peaks this is just peak 1
 b1 = [1600*10^(-18),1.55*10^(-7),(10^-18)]
 fit1=fitnlm(energy1, peak1, lorentzian,b1)
 figure; plot(energy1,peak1)
 hold on; plot(energy1,lorentzian([fit1.Coefficients{1,1},fit1.Coefficients{2,1},fit1.Coefficients{3,1}],energy1))
 figure; plot(fit1.Residuals{1:end,1})
+%line width squared for peak 1 with  error 
+%{3.43978799312567e-17,3.80066459794880e-18}
 
-%works but not needed:
-%convert to array
-%mossbauer_data= table2array(mossbauer_data);
-%findpeaks(mossbauer_data);
+
+
+
+
+

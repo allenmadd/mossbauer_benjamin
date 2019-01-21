@@ -139,12 +139,12 @@ energy6=energy(860:1:894);
 peak6=mossbauer_data_no_background(860:894,1);
 
 c6= [   1.949*10^-15,2.3*10^-7,(10^-18)];
-fit6=fitnlm(energy6,peak6,lorentzian,c6);
+fit6=fitnlm(energy6,peak6,lorentzian,c6)
 figure;
 plot(energy6,peak6);
 hold on;
 plot(energy6, lorentzian([fit6.Coefficients{1,1},fit6.Coefficients{2,1},fit6.Coefficients{3,1}],energy6));
 figure;
 plot(fit6.Residuals{1:end,1})
-%line width:
+%line width:5.1285e-17  , error:  4.9383e-18 
 

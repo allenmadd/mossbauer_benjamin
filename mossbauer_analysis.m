@@ -116,6 +116,19 @@ figure;
 plot(fit2.Residuals{1:end,1});
 %line width:  3.084e-17  , error:  6.4532e-18
 
+%PEAK 2point5 (secretly peak 5)
+%this good make it look like this
+energy2point5 = energy(203:1:230);
+peak2point5= mossbauer_data_no_background(203:230,1);
+
+%do this for all of the peaks this is just peak 1
+c2point5 = [1.1580*10^-15,5.316*10^-8,(10^-18)]; 
+fit2point5=fitnlm(energy2point5, peak2point5, lorentzian,c2point5)
+figure; plot(energy2point5,peak2point5)
+hold on; plot(energy2point5,lorentzian([fit2point5.Coefficients{1,1},fit2point5.Coefficients{2,1},fit2point5.Coefficients{3,1}],energy2point5))
+figure; plot(fit2point5.Residuals{1:end,1})
+%line width squared:   3.2163e-17,  energy:  5.8004e-18  
+
 %PEAK 3 (secretly 6)
 energy3=energy(350:1:385);
 peak3=mossbauer_data_no_background(350:385,1);
@@ -129,6 +142,19 @@ plot(energy3, lorentzian([fit3.Coefficients{1,1},fit3.Coefficients{2,1},fit3.Coe
 figure;
 plot(fit3.Residuals{1:end,1})
 %line width: 4.4256e-17  , error  4.1702e-18 
+
+%PEAK 3point5 (secretly peak 7)
+%this good make it look like this
+energy3point5 = energy(607:1:630);
+peak3point5= mossbauer_data_no_background(607:630,1);
+
+%do this for all of the peaks this is just peak 1
+c3point5 = [1.8580*10^-15,-2.549*10^-7,(10^-18)]; 
+fit3point5=fitnlm(energy3point5, peak3point5, lorentzian,c3point5)
+figure; plot(energy3point5,peak3point5)
+hold on; plot(energy3point5,lorentzian([fit3point5.Coefficients{1,1},fit3point5.Coefficients{2,1},fit3point5.Coefficients{3,1}],energy3point5))
+figure; plot(fit3point5.Residuals{1:end,1})
+%line width:4.9968e-17   error: 3.8841e-18 
 
 %PEAK 4 (secretly 8) (aka 2nd from the left in the right-hand batch of
 %peaks)
@@ -145,7 +171,18 @@ figure;
 plot(fit4.Residuals{1:end,1})
 %line width: 7.0821e-17, error: 8.8673e-18 
 
+%PEAK 4point5 (secretly peak 9)
+%this good make it look like this
+energy4point5 = energy(715:1:737);
+peak4point5= mossbauer_data_no_background(715:737,1);
 
+%do this for all of the peaks this is just peak 1
+c4point5 = [1.0860*10^-15,-5.144*10^-8,(10^-18)]; 
+fit4point5=fitnlm(energy4point5, peak4point5, lorentzian,c4point5)
+figure; plot(energy4point5,peak4point5)
+hold on; plot(energy4point5,lorentzian([fit4point5.Coefficients{1,1},fit4point5.Coefficients{2,1},fit4point5.Coefficients{3,1}],energy4point5))
+figure; plot(fit4point5.Residuals{1:end,1})
+%line width:  4.8543e-17 , error:   8.7178e-18  
 
 %PEAK 5 (secretly 10)
 energy5=energy(757:1:780);
@@ -161,11 +198,24 @@ figure;
 plot(fit5.Residuals{1:end,1})
 %line width: 3.1564e-17, error: 4.9576e-18 
 
+%PEAK 5point5 (secretly peak 11)
+%this good make it look like this
+energy5point5 = energy(810:1:831);
+peak5point5= mossbauer_data_no_background(810:831,1);
+
+%do this for all of the peaks this is just peak 1
+c5point5 = [1.6480*10^-15,1.273*10^-7,(10^-18)]; 
+fit5point5=fitnlm(energy5point5, peak5point5, lorentzian,c5point5)
+figure; plot(energy5point5,peak5point5)
+hold on; plot(energy5point5,lorentzian([fit5point5.Coefficients{1,1},fit5point5.Coefficients{2,1},fit5point5.Coefficients{3,1}],energy5point5))
+figure; plot(fit5point5.Residuals{1:end,1})
+%line width:  5.4416e-17, error: 6.0448e-18  
+
 %PEAK 6 (secretly 12)
 energy6=energy(860:1:894);
 peak6=mossbauer_data_no_background(860:894,1);
 
-c6= [   1.949*10^-15,2.3*10^-7,(10^-18)];
+c6= [1.949*10^-15,2.3*10^-7,(10^-18)];
 fit6=fitnlm(energy6,peak6,lorentzian,c6)
 figure;
 plot(energy6,peak6);
@@ -174,4 +224,3 @@ plot(energy6, lorentzian([fit6.Coefficients{1,1},fit6.Coefficients{2,1},fit6.Coe
 figure;
 plot(fit6.Residuals{1:end,1})
 %line width:5.1285e-17 , error:  4.9383e-18 
-

@@ -90,6 +90,7 @@ lorentzian = @(b,x) ( b(1)./( (x-b(2)).^2 + b(3) ) )
 % b(2) is the energy value at which the Lorentzian peaks
 % b(3) = (linewidth/2)^2
 
+energy_values= [];
 %% PEAK ANALYSIS
 %notes from Jan 20th: it looks like we did every other peak in class? why?
 %i will just do the even peaks and then if necessary i can do the others
@@ -107,6 +108,7 @@ hold on; plot(energypoint5,lorentzian([fitpoint5.Coefficients{1,1},fitpoint5.Coe
 figure; plot(fitpoint5.Residuals{1:end,1})
 %line width squared: 5.5375e-17    6.1433e-18 
 %delta E (transition energy): 2.6066e-07    2.6216e-22 
+
 
 %PEAK 1 (secretly peek a boo 2)
 %this good make it look like this
@@ -278,14 +280,29 @@ plot(fit6.Residuals{1:end,1})
 %line width:5.1901e-17     5.264e-18 
 %transition energy: 2.3024e-07    2.4203e-22    
 
+%
+%
+%
 
-%% Analysis 1 JAN 22 2019 LAB DAY 3
+
+%% Analysis 1 JAN 22 2019 LAB DAY 3 
 % Measure change in energy that corresponds to transition energy.  
 % The transition energy corresponds to the x coordinate of the max peak in
 % our nonlinear fit we created. Matlab recorded this value as b2 in the 
 % info about the fit. 
 % Manually take b2 values and put into vector as transition energies: 
-trans_energy = [2.6072e-07,1.5731e-07,5.3194e-08,-2.5638e-08,-1.2969e-07,-2.3339e-07,-2.5481e-07, -1.529e-07, -5.1092e-08, 2.4764e-08, 1.2712e-07, 2.309e-07]; 
+trans_energy = [2.61e-07,
+1.57E-07,
+5.25E-08,
+-2.54E-08,
+-1.30E-07,
+-2.34E-07,
+-2.55E-07,
+-1.53E-07,
+-5.05E-08,
+2.49E-08,
+1.28E-07,
+2.30E-07]; 
 trans_energy_error = [1.8672e-21,  3.7132e-23, 1.8493e-22, 4.3933e-23, 6.2515e-22,  3.8137e-22, 1.9614e-21, 1.2119e-21, 1.111e-21, 2.5069e-22, 8.7447e-22, 4.9659e-22];
 
 % Visualize transition energies per peak
@@ -358,7 +375,7 @@ Hweight = 1./H_error.^2;
 H_avg = (sum(Hweight.*H)./sum(Hweight)); % average H from our answers
 
 % RESULTS! 
-% H_avg = 3.0778e+05
+% H_avg = 3.0764e+05
 % Compare to known H = 329400 Gauss
 
 %% Analysis 1 Part A
@@ -410,7 +427,7 @@ mu_weight = 1./mu_mm_err.^2;
 mu_avg = (sum(mu_weight.*mu_mm)./sum(mu_weight)); % average mu/m_0 
 
 % RESULTS! 
-% mu_avg = -1.7090
+% mu_avg = -1.6718
 
 % Consider probability that the accepted mu_1 value falls within our error
 % bars around mu_avg. Compare to known mu_1 = 1.71 * m_0.

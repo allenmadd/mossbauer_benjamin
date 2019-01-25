@@ -278,14 +278,27 @@ plot(fit6.Residuals{1:end,1})
 %line width:  5.0837e-17    3.5296e-18 
 %transition energy: 2.3101e-07     4.889e-22  
 
-
+%
+%
+%
 %% Analysis 1 JAN 22 2019 LAB DAY 3
 % Measure change in energy that corresponds to transition energy.  
 % The transition energy corresponds to the x coordinate of the max peak in
 % our nonlinear fit we created. Matlab recorded this value as b2 in the 
 % info about the fit. 
 % Manually take b2 values and put into vector as transition energies: 
-trans_energy = [2.6072e-07,1.5731e-07,5.3194e-08,-2.5638e-08,-1.2969e-07,-2.3339e-07,-2.5481e-07, -1.529e-07, -5.1092e-08, 2.4764e-08, 1.2712e-07, 2.309e-07]; 
+trans_energy = [2.61E-07,
+1.57E-07,
+5.36E-08,
+-2.52E-08,
+-1.29E-07,
+-2.34E-07,
+-2.56E-07,
+-1.53E-07,
+-5.07E-08,
+2.54E-08,
+1.28E-07,
+2.31E-07]; 
 trans_energy_error = [1.8672e-21,  3.7132e-23, 1.8493e-22, 4.3933e-23, 6.2515e-22,  3.8137e-22, 1.9614e-21, 1.2119e-21, 1.111e-21, 2.5069e-22, 8.7447e-22, 4.9659e-22];
 
 % Visualize transition energies per peak
@@ -358,7 +371,7 @@ Hweight = 1./H_error.^2;
 H_avg = (sum(Hweight.*H)./sum(Hweight)); % average H from our answers
 
 % RESULTS! 
-% H_avg = 3.0778e+05
+% H_avg =  3.0791e+05
 % Compare to known H = 329400 Gauss
 
 %% Analysis 1 Part A
@@ -410,7 +423,7 @@ mu_weight = 1./mu_mm_err.^2;
 mu_avg = (sum(mu_weight.*mu_mm)./sum(mu_weight)); % average mu/m_0 
 
 % RESULTS! 
-% mu_avg = -1.7090
+% mu_avg = -1.6734
 
 % Consider probability that the accepted mu_1 value falls within our error
 % bars around mu_avg. Compare to known mu_1 = 1.71 * m_0.

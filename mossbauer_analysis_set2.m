@@ -355,7 +355,7 @@ H = -I*(1/(m_0*dm_j))*d_energy_h;
 
 % Redefine H_error based on limits of system, which is velocity resolution
 % in this case. 
-H_error = H*resolution_vel;
+H_error = H*resolution_vel*sqrt(2);
 
 % H is 1.0e+05 * [3.0412    3.0318    3.1209    3.1220] Gauss
 % H_error 1.0e+04 * [1.3855    1.3812    1.4218    1.4223] Gauss 
@@ -420,7 +420,7 @@ mu_mm_left = -ediff_mm_left*I./(dm_jvec*H_avg*m_0);
 mu_mm = [mu_mm_left, mu_mm_right];
 mu_mm_err = mu_mm*resolution_vel/m_0;
 
-H_error = H*resolution_vel
+H_error = H*resolution_vel*sqrt(2);
 
 % Weigh results by error and find average mu: 
 mu_weight = 1./mu_mm_err.^2; 

@@ -1,5 +1,5 @@
 %Madeleine and Angela try their bests
-%Mossbauer Analysis 17 Jan 2019
+%Mossbauer Analysis 24 Jan 2019
 
 
 %files found at path: "C:\Users\Student\Documents\MadelAngela_mossbauer_15Jan2019";
@@ -333,9 +333,6 @@ d_energy_h = ([trans_energy(9)- trans_energy(11), trans_energy(8) - trans_energy
 d_energy_h_error = [sqrt((trans_energy_error(11))^2+trans_energy_error(9)^2), sqrt((trans_energy_error(10))^2+(trans_energy_error(8))^2), sqrt((trans_energy_error(5))^2+(trans_energy_error(3))^2),sqrt((trans_energy_error(2))^2+(trans_energy_error(4))^2)]; % error in energy differences
 
 
-
-
-
 % Use these energy differences to find magnetic field H. 
 m_0 = 2.93 *10^-13; % Given ground state magnetic moment. 
 I = 1/2; % given spin of the nucleus
@@ -351,7 +348,7 @@ H = -I*(1/(m_0*dm_j))*d_energy_h;
 
 % Redefine H_error based on limits of system, which is velocity resolution
 % in this case. 
-H_error = H*resolution_vel;
+H_error = sqrt(2)*H*resolution_vel; % square root of 2 because we are taking energy for magnetic field comes from taking the difference between two transition energies
 
 % H is 1.0e+05 * [3.0412    3.0318    3.1209    3.1220] Gauss
 % H_error 1.0e+04 * [1.3855    1.3812    1.4218    1.4223] Gauss 
@@ -416,7 +413,7 @@ mu_mm_left = -ediff_mm_left*I./(dm_jvec*H_avg*m_0);
 mu_mm = [mu_mm_left, mu_mm_right];
 mu_mm_err = mu_mm*resolution_vel/m_0;
 
-H_error = H*resolution_vel
+H_error = H*resolution_vel*sqrt(2); % square root 2 from taking energy difference initially
 
 % Weigh results by error and find average mu: 
 mu_weight = 1./mu_mm_err.^2; 

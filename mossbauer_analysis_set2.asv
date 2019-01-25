@@ -1,15 +1,16 @@
 %Madeleine and Angela try their bests
-%Mossbauer Analysis 15 Jan 2019
+%Mossbauer Analysis 17 Jan 2019
+
 
 %files found at path: "C:\Users\Student\Documents\MadelAngela_mossbauer_15Jan2019";
-clear all;
 close all
+clear all
 
 %% Analysis: Step 2: Assume Gaussian Distribution
 % Calculate the error in your data with and without the backgound counts.
 
 % Upload the file as a table. 
-filename="step15_15Jan2019.csv";
+filename="step15_17Jan2019.csv";
 mossbauer_data= readtable(filename);
 
 % Graph the data
@@ -20,7 +21,7 @@ mossbauer_data= table2array(mossbauer_data);
 
 % Calculate the error in the data (1) with and (2) without background 
 % counts. 
-filename= "step7_real_15Jan2019.csv";
+filename= "step7_17Jan2019.csv";
 background_counts = readtable(filename);
 
 
@@ -89,59 +90,57 @@ lorentzian = @(b,x) ( b(1)./( (x-b(2)).^2 + b(3) ) )
 % b(2) is the energy value at which the Lorentzian peaks
 % b(3) = (linewidth/2)^2
 
-
 %% PEAK ANALYSIS
 %notes from Jan 20th: it looks like we did every other peak in class? why?
 %i will just do the even peaks and then if necessary i can do the others
 
 %PEAK point5 (secretly peak 1)
 %this good make it look like this
-energypoint5 = energy(91:1:121);
-peakpoint5= mossbauer_data_no_background(91:121,1);
-weightpoint5 = 1./(absorption_error(91:121).^2);
+energypoint5 = energy(86:1:140);
+peakpoint5= mossbauer_data_no_background(86:140,1);
+weightpoint5 = 1./(absorption_error(86:140).^2);
 %do this for all of the peaks this is just peak 1
-cpoint5 = [1.8330*10^-15,2.604*10^-7,(10^-18)]; %changed name to "constant 1" aka "c1"
+cpoint5 = [1.575*10^-15,2.623*10^-7,(10^-18)]; %changed name to "constant 1" aka "c1"
 fitpoint5=fitnlm(energypoint5, peakpoint5, lorentzian,cpoint5,'Weights',weightpoint5)
 figure; plot(energypoint5,peakpoint5)
 hold on; plot(energypoint5,lorentzian([fitpoint5.Coefficients{1,1},fitpoint5.Coefficients{2,1},fitpoint5.Coefficients{3,1}],energypoint5))
 figure; plot(fitpoint5.Residuals{1:end,1})
-%line width squared: 4.6256e-17, error: 4.605e-18 
-%delta E (transition energy): 2.6072e-07, error: 1.8672e-21 
+%line width squared: 5.5375e-17    6.1433e-18 
+%delta E (transition energy): 2.6066e-07    2.6216e-22 
 
 %PEAK 1 (secretly peek a boo 2)
 %this good make it look like this
-energy1 = energy(140:1:190);
-peak1= mossbauer_data_no_background(140:190,1);
-weight1= 1./(absorption_error(140:190).^2);
+energy1 = energy(140:1:181);
+peak1= mossbauer_data_no_background(140:181,1);
+weight1= 1./(absorption_error(140:181).^2);
 %do this for all of the peaks this is just peak 1
-c1 = [1600*10^(-18),1.55*10^(-7),(10^-18)]; %changed name to "constant 1" aka "c1"
+c1 = [1559*10^(-18),1.559*10^(-7),(10^-18)]; %changed name to "constant 1" aka "c1"
 fit1=fitnlm(energy1, peak1, lorentzian,c1, 'Weights', weight1)
 figure; plot(energy1,peak1)
 hold on; plot(energy1,lorentzian([fit1.Coefficients{1,1},fit1.Coefficients{2,1},fit1.Coefficients{3,1}],energy1))
 figure; plot(fit1.Residuals{1:end,1})
-%line width squared for peak 1 with  error  {3.43978799312567e-17,3.80066459794880e-18}
-%transition energy: 1.5731e-07  , error:  3.7132e-23
+%line width squared for peak 1 with  error  4.6919e-17    6.4072e-18 
+%transition energy: 1.5656e-07     3.873e-22 
 
 
 %PEAK 1point5 (secretly peak 3)
 %this good make it look like this
-energy1point5 = energy(203:1:230);
-peak1point5= mossbauer_data_no_background(203:230,1);
-weight1point5=1./(absorption_error(203:230).^2);
+energy1point5 = energy(204:1:237);
+peak1point5= mossbauer_data_no_background(204:237,1);
+weight1point5=1./(absorption_error(204:237).^2);
 %do this for all of the peaks this is just peak 1
-c1point5 = [1.1580*10^-15,5.316*10^-8,(10^-18)]; 
-fit1point5=fitnlm(energy1point5, peak1point5, lorentzian,c1point5, 'Weights', weight1point5);
+c1point5 = [921.5*10^-18,5.125*10^-8,(10^-18)]; 
+fit1point5=fitnlm(energy1point5, peak1point5, lorentzian,c1point5, 'Weights', weight1point5)
 figure; plot(energy1point5,peak1point5)
 hold on; plot(energy1point5,lorentzian([fit1point5.Coefficients{1,1},fit1point5.Coefficients{2,1},fit1point5.Coefficients{3,1}],energy1point5))
 figure; plot(fit1point5.Residuals{1:end,1})
-%line width squared:   3.2163e-17 , error:   5.8004e-18 
-%transition energy: 5.3194e-08   error:  1.8493e-22
+%line width squared:   2.9145e-17    6.4289e-18
+%transition energy: 5.2509e-08    4.9735e-24
 
 %PEAK 2 (secretly 4)
 energy2=energy(247:1:275);
 peak2=mossbauer_data_no_background(247:275,1);
 weight2=1./(absorption_error(247:275).^2);
-
 c2=[(9.553*10^-16),2.672*10^-8,(10^-18)];
 fit2=fitnlm(energy2, peak2, lorentzian,c2, 'Weights', weight2)
 figure;
@@ -150,24 +149,24 @@ hold on;
 plot(energy2,lorentzian([fit2.Coefficients{1,1},fit2.Coefficients{2,1},fit2.Coefficients{3,1}],energy2))
 figure;
 plot(fit2.Residuals{1:end,1});
-%line width:  3.084e-17  , error:  6.4532e-18
-%transition energy:  -2.5638e-08 , error:   4.3933e-23 
+%line width:  3.6456e-17    8.2088e-18   
+%transition energy:  -2.5358e-08    1.4541e-22
 
 
 %PEAK 2point5 (secretly peak 5)
 %this good make it look like this
-energy2point5 = energy(300:1:326);
-peak2point5= mossbauer_data_no_background(300:326,1);
-weight2point5=1./(absorption_error(300:326).^2);
+energy2point5 = energy(292:1:336);
+peak2point5= mossbauer_data_no_background(292:336,1);
+weight2point5=1./(absorption_error(292:336).^2);
 
 %do this for all of the peaks this is just peak 1
-c2point5 = [1.452*10^-15,-1.294*10^-7,(10^-18)]; 
+c2point5 = [1346*10^-18,-1.294*10^-7,(10^-18)]; 
 fit2point5=fitnlm(energy2point5, peak2point5, lorentzian,c2point5, 'Weights', weight2point5)
 figure; plot(energy2point5,peak2point5)
 hold on; plot(energy2point5,lorentzian([fit2point5.Coefficients{1,1},fit2point5.Coefficients{2,1},fit2point5.Coefficients{3,1}],energy2point5))
 figure; plot(fit2point5.Residuals{1:end,1})
-%line width squared:   3.2163e-17,  energy:  5.8004e-18  
-%transition energy: -1.2969e-07  , error:  6.2515e-22  
+%line width squared:   3.8521e-17    5.6184e-18 
+%transition energy: -1.2987e-07    2.8055e-23 
 
 %PEAK 3 (secretly 6)
 energy3=energy(350:1:385);
@@ -182,8 +181,8 @@ hold on;
 plot(energy3, lorentzian([fit3.Coefficients{1,1},fit3.Coefficients{2,1},fit3.Coefficients{3,1}],energy3));
 figure;
 plot(fit3.Residuals{1:end,1})
-%line width: 4.4256e-17  , error  4.1702e-18 
-%transition energy: -2.3339e-07 , error:   3.8137e-22
+%line width: 5.1134e-17    4.2101e-18 
+%transition energy: -2.337e-07    5.4344e-22
 
 %PEAK 3point5 (secretly peak 7)
 %this good make it look like this
@@ -207,61 +206,61 @@ peak4=mossbauer_data_no_background(654:689,1);
 weight4=1./(absorption_error(654:689).^2);
 
 c4= [1.591*10^-15,-1.522*10^-7,(10^-18)];
-fit4=fitnlm(energy4,peak4,lorentzian,c4, 'Weights', weight4);
+fit4=fitnlm(energy4,peak4,lorentzian,c4, 'Weights', weight4)
 figure;
 plot(energy4,peak4);
 hold on;
 plot(energy4, lorentzian([fit4.Coefficients{1,1},fit4.Coefficients{2,1},fit4.Coefficients{3,1}],energy4));
 figure;
 plot(fit4.Residuals{1:end,1})
-%line width: 7.0821e-17, error: 8.8673e-18 
-%transition energy: -1.529e-07, error:    1.2119e-21 
+%line width: 4.935e-17    5.7921e-18
+%transition energy: -1.5293e-07    3.9575e-22
 
 %PEAK 4point5 (secretly peak 9)
 %this good make it look like this
-energy4point5 = energy(715:1:737);
-peak4point5= mossbauer_data_no_background(715:737,1);
-weight4point5=1./(absorption_error(715:737).^2);
+energy4point5 = energy(705:1:747);
+peak4point5= mossbauer_data_no_background(705:747,1);
+weight4point5=1./(absorption_error(705:747).^2);
 
 %do this for all of the peaks this is just peak 1
-c4point5 = [1.0860*10^-15,-5.144*10^-8,(10^-18)]; 
+c4point5 = [912.5*10^-18,-4.954*10^-8,(10^-18)]; 
 fit4point5=fitnlm(energy4point5, peak4point5, lorentzian,c4point5, 'Weights', weight4point5)
 figure; plot(energy4point5,peak4point5)
 hold on; plot(energy4point5,lorentzian([fit4point5.Coefficients{1,1},fit4point5.Coefficients{2,1},fit4point5.Coefficients{3,1}],energy4point5))
 figure; plot(fit4point5.Residuals{1:end,1})
-%line width:  4.8543e-17 , error:   8.7178e-18  
-%transition energy: -5.1092e-08, error:     1.111e-21  
+%line width: 4.0206e-17    6.5187e-18
+%transition energy: -5.0539e-08    2.9272e-23 
 
 %PEAK 5 (secretly 10)
-energy5=energy(757:1:780);
-peak5=mossbauer_data_no_background(757:780,1);
-weight5=1./(absorption_error(757:780).^2);
+energy5=energy(747:1:788);
+peak5=mossbauer_data_no_background(747:788,1);
+weight5=1./(absorption_error(747:788).^2);
 
-c5= [ 1.1120*10^-15,2.64*10^-8,(10^-18)];
-fit5=fitnlm(energy5,peak5,lorentzian,c5, 'Weights', weight5);
+c5= [ 1066*10^-18,2.463*10^-8,(10^-18)];
+fit5=fitnlm(energy5,peak5,lorentzian,c5, 'Weights', weight5)
 figure;
 plot(energy5,peak5);
 hold on;
 plot(energy5, lorentzian([fit5.Coefficients{1,1},fit5.Coefficients{2,1},fit5.Coefficients{3,1}],energy5));
 figure;
 plot(fit5.Residuals{1:end,1})
-%line width: 3.1564e-17, error: 4.9576e-18 
-%transtion energy:  2.4764e-08, error:    2.5069e-22   
+%line width: 3.3352e-17     6.841e-18 
+%transtion energy: 2.4857e-08    2.9889e-23 
 
 %PEAK 5point5 (secretly peak 11)
 %this good make it look like this
-energy5point5 = energy(810:1:831);
-peak5point5= mossbauer_data_no_background(810:831,1);
-weight5point5=1./(absorption_error(810:831).^2);
+energy5point5 = energy(805:1:841);
+peak5point5= mossbauer_data_no_background(805:841,1);
+weight5point5=1./(absorption_error(805:841).^2);
 
 %do this for all of the peaks this is just peak 1
-c5point5 = [1.6480*10^-15,1.273*10^-7,(10^-18)]; 
+c5point5 = [1494*10^-18,1.273*10^-7,(10^-18)]; 
 fit5point5=fitnlm(energy5point5, peak5point5, lorentzian,c5point5, 'Weights', weight5point5)
 figure; plot(energy5point5,peak5point5)
 hold on; plot(energy5point5,lorentzian([fit5point5.Coefficients{1,1},fit5point5.Coefficients{2,1},fit5point5.Coefficients{3,1}],energy5point5))
 figure; plot(fit5point5.Residuals{1:end,1})
-%line width:  5.4416e-17, error: 6.0448e-18  
-%transition energy:  1.2712e-07, error:    8.7447e-22 
+%line width:  4.0816e-17    4.5062e-18
+%transition energy:  1.2764e-07    2.1725e-22
 
 %PEAK 6 (secretly 12)
 energy6=energy(860:1:894);
